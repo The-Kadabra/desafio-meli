@@ -17,3 +17,6 @@ pnpm-debug.log*
 # Ignorar logs e arquivos de sistema
 .DS_Store
 *.log
+
+# Ignorar Identifier criado pelos charts do Dynatrace
+dynakube.yaml:Zone.Identifier
