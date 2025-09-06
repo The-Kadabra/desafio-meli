@@ -25,7 +25,7 @@ resource "aws_api_gateway_resource" "test" {
 # -------------------------------
 # Método GET (exige API Key)
 # -------------------------------
-resource "aws_api_gateway_method" "get_test" {
+resource "aws_api_gateway_method" "get" {
   rest_api_id      = aws_api_gateway_rest_api.example.id
   resource_id      = aws_api_gateway_resource.test.id
   http_method      = "GET"
@@ -47,7 +47,7 @@ resource "aws_api_gateway_vpc_link" "nlb_link" {
 resource "aws_api_gateway_integration" "nlb_integration" {
   rest_api_id             = aws_api_gateway_rest_api.example.id
   resource_id             = aws_api_gateway_resource.test.id
-  http_method             = aws_api_gateway_method.get_test.http_method
+  http_method             = aws_api_gateway_method.get.http_method
   integration_http_method = "GET"
   type                    = "HTTP"
   uri                     = "https://internal-api.coreplatform.com.br/api/products"
@@ -68,14 +68,14 @@ resource "aws_api_gateway_integration" "nlb_integration" {
 resource "aws_api_gateway_method_response" "ok" {
   rest_api_id = aws_api_gateway_rest_api.example.id
   resource_id = aws_api_gateway_resource.test.id
-  http_method = aws_api_gateway_method.get_test.http_method
+  http_method = aws_api_gateway_method.get.http_method
   status_code = "200"
 }
 
 resource "aws_api_gateway_integration_response" "ok" {
   rest_api_id = aws_api_gateway_rest_api.example.id
   resource_id = aws_api_gateway_resource.test.id
-  http_method = aws_api_gateway_method.get_test.http_method
+  http_method = aws_api_gateway_method.get.http_method
   status_code = aws_api_gateway_method_response.ok.status_code
 }
 
@@ -114,6 +114,11 @@ resource "aws_api_gateway_usage_plan" "example" {
   api_stages {
     api_id = aws_api_gateway_rest_api.example.id
     stage  = aws_api_gateway_stage.dev.stage_name
+  }
+
+  throttle_settings {
+    burst_limit = 5  #RPS constante que o cliente pode chamar
+    rate_limit  = 10 #Máximo de 20 requisições no pico
   }
 }
 
@@ -154,5 +159,73 @@ resource "aws_route53_record" "api" {
     name                   = aws_api_gateway_domain_name.custom.regional_domain_name
     zone_id                = aws_api_gateway_domain_name.custom.regional_zone_id
     evaluate_target_health = false
+  }
+}
+
+#####
+#4xx#
+#####
+resource "aws_api_gateway_gateway_response" "ACCESS_DENIED" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+  response_type = "ACCESS_DENIED"
+  status_code = "403"
+
+  response_templates = {
+    "application/json" = jsonencode({
+      message = "Acesso negado: Por favor, forneça um token de autorizacao (cognito) valido ou chame o suporte"
+    })
+  }
+}
+
+resource "aws_api_gateway_gateway_response" "INVALID_API_KEY" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+  response_type = "INVALID_API_KEY"
+  status_code = "403"
+
+  response_templates = {
+    "application/json" = jsonencode({
+      message = "Acesso negado: Por favor, forneca uma chave API-KEY valida"
+    })
+  }
+}
+
+resource "aws_api_gateway_gateway_response" "EXPIRED_TOKEN" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+  response_type = "EXPIRED_TOKEN"
+  status_code = "403"
+
+  response_templates = {
+    "application/json" = jsonencode({
+      message = "Acesso negado: Por favor, solicite uma nova chave API-KEY. A API-KEY atual esta vencida"
+    })
+  }
+}
+
+
+#####
+#5xx#
+#####
+
+resource "aws_api_gateway_gateway_response" "AUTHORIZER_FAILURE" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+  response_type = "AUTHORIZER_FAILURE"
+  status_code = "500"
+
+  response_templates = {
+    "application/json" = jsonencode({
+      message = "O erro 500 significa que os nossos servidores estao enfrentando problema ou instabilidade."
+    })
+  }
+}
+
+resource "aws_api_gateway_gateway_response" "INTEGRATION_FAILURE" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+  response_type = "INTEGRATION_FAILURE"
+  status_code = "504"
+
+  response_templates = {
+    "application/json" = jsonencode({
+      message = "O erro 504 significa que as nossas integracoes estao enfrentando problema ou instabilidade."
+    })
   }
 }
