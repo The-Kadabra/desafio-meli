@@ -1,2 +1,19 @@
-*.terraform*
-*.terraform/*
+# Ignorar arquivos do Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.tfplan
+*.tfstate
+*.tfstate.backup
+crash.log
+
+# Ignorar dependências e cache do Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ignorar logs e arquivos de sistema
+.DS_Store
+*.log
