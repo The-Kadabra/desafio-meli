@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Smartphone X",
+    "imageUrl": "https://example.com/images/smartphone-x.jpg",
+    "description": "Smartphone X com tela AMOLED e bateria de longa duração.",
+    "price": 2999.99,
+    "rating": 4.5,
+    "specs": {
+      "screen": "6.5'' AMOLED",
+      "battery": "5000mAh",
+      "camera": "108MP",
+      "storage": "128GB"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Notebook Pro",
+    "imageUrl": "https://example.com/images/notebook-pro.jpg",
+    "description": "Notebook Pro leve e potente para produtividade.",
+    "price": 5999.99,
+    "rating": 4.7,
+    "specs": {
+      "processor": "Intel i7",
+      "ram": "16GB",
+      "storage": "512GB SSD",
+      "display": "15.6'' Full HD"
+    }
+  }
+]

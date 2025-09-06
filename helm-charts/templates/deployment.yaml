@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: desafio-meli-app
+  namespace: desafio-meli-app
+  labels:
+    app: desafio-meli-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: desafio-meli-app
+  template:
+    metadata:
+      labels:
+        app: desafio-meli-app
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.service.port }}

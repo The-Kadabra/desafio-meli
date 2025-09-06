@@ -1,0 +1,33 @@
+# --- Configurações do Deployment ---
+replicaCount: 1
+# --- Configurações da Imagem Docker ---
+image:
+  repository: 505838347528.dkr.ecr.us-east-1.amazonaws.com/desafio-meli-app
+  pullPolicy: Always
+  tag: "latest"
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+# --- Configurações da Conta de Serviço (Service Account) ---
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+# --- Anotações e segurança para os Pods ---
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+# --- Configurações do Serviço (Service) ---
+service:
+  type: ClusterIP
+  port: 3000
+  targetPort: 8080
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+autoscaling:
+  enabled: false

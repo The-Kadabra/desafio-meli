@@ -1,0 +1,57 @@
+apiVersion: v1
+data:
+  apiToken: ZHQwYzAxLlg1NzRSTktZNDJLRlRKVElDTkFEM1ZDNS5UTzRBNExJWkpMQlRYUkpNU0dZUVBXWlBWVFk0QlUyU0xRSlA0NkQ2S0hJSUNSRTc1NFVWQzc0VEQzUU1RNDNY
+  dataIngestToken: ZHQwYzAxLkpUUktXNUhCT1VRUE9SSUxXNFBNUlVPSS5XWllNQ01CUk9PRlJOWk5XWTZYV1lQWlVOU0lFWUlSNjdFWUtJWFdMU0pIRVZGU0tYVEtJN0NWRlY0RUpZNEVT
+kind: Secret
+metadata:
+  name: k8s-desafio-api
+  namespace: dynatrace
+type: Opaque
+---
+apiVersion: dynatrace.com/v1beta5
+kind: DynaKube
+metadata:
+  name: k8s-desafio-api
+  namespace: dynatrace
+  annotations:
+    feature.dynatrace.com/k8s-app-enabled: "true"
+    feature.dynatrace.com/injection-readonly-volume: "true"
+spec:
+  apiUrl: https://sgp25863.live.dynatrace.com/api
+  networkZone: us-east-1
+  metadataEnrichment:
+    enabled: true
+  oneAgent:
+    applicationMonitoring: {}
+  activeGate:
+    capabilities:
+      - routing
+      - kubernetes-monitoring
+      - debugging
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1.5Gi
+      limits:
+        cpu: 1000m
+        memory: 1.5Gi
+    volumeClaimTemplate:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: gp3
+      resources:
+        requests:
+          storage: 1Gi
+  templates:
+    logMonitoring:
+      imageRef:
+        repository: public.ecr.aws/dynatrace/dynatrace-logmodule
+        tag: 1.319.76.20250819-104206
+  logMonitoring: {}
+  telemetryIngest:
+    protocols:
+      - jaeger
+      - otlp
+      - statsd
+      - zipkin
+    serviceName: telemetry-ingest

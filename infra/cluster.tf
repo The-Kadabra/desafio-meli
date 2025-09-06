@@ -1,0 +1,168 @@
+provider "aws" {
+  region = local.region
+}
+
+data "aws_availability_zones" "available" {
+  # Exclude local zones
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
+}
+
+locals {
+  name            = "k8s-desafio-api"
+  cluster_version = "1.33"
+  region          = "us-east-1"
+
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
+
+  tags = {
+    Test       = local.name
+    GithubRepo = "terraform-aws-eks"
+    GithubOrg  = "terraform-aws-modules"
+  }
+}
+
+################################################################################
+# EKS Module
+################################################################################
+
+module "eks" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v21.0.7"
+
+  name                   = local.name
+  kubernetes_version     = local.cluster_version
+  endpoint_public_access = true
+
+  enable_cluster_creator_admin_permissions = true
+
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
+
+  # EKS Addons
+  addons = {
+    coredns = {}
+    eks-pod-identity-agent = {
+      before_compute = true
+    }
+    aws-ebs-csi-driver = {
+      most_recent = true
+    }
+    kube-proxy = {}
+    vpc-cni = {
+      before_compute = true
+    }
+  }
+
+  eks_managed_node_groups = {
+    nodes = {
+      ami_type       = "BOTTLEROCKET_x86_64"
+      instance_types = ["t3.medium"]
+
+      min_size = 1
+      max_size = 2
+      # This value is ignored after the initial creation
+      # https://github.com/bryantbiggs/eks-desired-size-hack
+      desired_size = 2
+
+      # This is not required - demonstrates how to pass additional configuration
+      # Ref https://bottlerocket.dev/en/os/1.19.x/api/settings/
+      bootstrap_extra_args = <<-EOT
+        # The admin host container provides SSH access and runs with "superpowers".
+        # It is disabled by default, but can be disabled explicitly.
+        [settings.host-containers.admin]
+        enabled = false
+
+        # The control host container provides out-of-band access via SSM.
+        # It is enabled by default, and can be disabled if you do not expect to use SSM.
+        # This could leave you with no way to access the API and change settings on an existing node!
+        [settings.host-containers.control]
+        enabled = true
+
+        # extra args added
+        [settings.kernel]
+        lockdown = "integrity"
+      EOT
+    }
+  }
+
+  node_security_group_additional_rules = {
+    # For kubeseal
+    ingress_8080 = {
+      type                          = "ingress"
+      protocol                      = "tcp"
+      from_port                     = 8080
+      to_port                       = 8080
+      source_cluster_security_group = true
+    }
+  }
+
+  tags = local.tags
+}
+
+data "aws_eks_cluster_auth" "this" {
+  name       = module.eks.cluster_name
+  depends_on = [module.eks]
+}
+
+resource "null_resource" "run_local_eks_auth" {
+
+  provisioner "local-exec" {
+    command = "aws eks update-kubeconfig --name ${local.name} --region ${local.region}"
+  }
+}
+
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 6.0"
+
+  name = local.name
+  cidr = local.vpc_cidr
+
+  azs             = local.azs
+  private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k)]
+  public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 48)]
+  intra_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 52)]
+
+  enable_nat_gateway = true
+  single_nat_gateway = true
+
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = 1
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/role/internal-elb" = 1
+  }
+
+  tags = local.tags
+}
+
+################################################################################
+# EBS CSI Driver Role
+################################################################################
+
+
+module "ebs_csi_driver_irsa" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> 5.30"
+
+  role_name = "${local.name}-ebs-csi-driver"
+
+  attach_ebs_csi_policy = true
+
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
+    }
+  }
+
+  tags = local.tags
+}
