@@ -125,3 +125,12 @@ Microsserviço em **Node.js** com arquitetura em **Express.js**, incluindo:
 - `src/middleware/cors.mjs` → middleware de CORS.  
 - `src/middleware/customErrors.mjs` → tratamento de erros.  
 - `src/routes/api.mjs` → rotas da API (`GET /api/products` e `GET /api/products/:id`).  
+
+---
+## Futuro
+
+- `Deploy CICD via GIT com GitOps` → Usando OIDC entre AWS e Github, helm e argocd.
+- `Autenticação JWT na API` → Neste conexto usaria o AWS Cognito no papel de OAuth 2.0.
+- `Camada de borda` → Adicionaria a Cloudflare como CDN e WAF do meu ambiente.
+- `Teste end-to-end` → Usando o Cypress por exemplo será possível valida o fluxo completo da aplicação, do começo ao fim, para garantir que o sistema funciona para o usuário final.
+- `Testes unitarios` → Para garantir o funcionamento isolado de cada parte do código.
