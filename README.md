@@ -3,8 +3,9 @@
 ## Descrição do Projeto
 O desafio deste projeto está dividido em 4 etapas principais, com o objetivo de construir uma arquitetura de API robusta, escalável, resiliente, segura e interativa com IA.
 
-## RUN.MD
-Para saber como executar este projeto veja em [RUN.MD](/run.md)
+Para saber como executar este projeto veja em [RUN.MD](/run.md).
+
+## Sobre o Projeto
 
 ### 1. Ambiente de API Seguro e Resiliente
 A primeira etapa focou na construção de uma API segura e resiliente usando **AWS API Gateway REST**.  
@@ -160,11 +161,28 @@ Estes são os custos que teremos na AWS sem contar as requisições em nossas ap
 |--------------|-----------------|--------------|
 | $6.25        | $43.75          | $175.00      |
 
+
+## Observabilidade
+A escolha do dynatrce veio pela questão de ser o framework mais rápido de se ter acesso ao free trial e criar uma Stack OpenSource levaria mais tempo. Mais deixo registrado que tenho uma stack criada segue link do [IN](https://www.linkedin.com/in/gabriel-henrique-pires-5039a3168/#:~:text=Projetos-,Observabilidade%20Cloud%20Native%20%2D%20EVK,-Observabilidade%20Cloud%20Native
+) 
+
+Aqui nós temos Métricas, Logs e AP, ou seja a trindade da Observabilidade. 
+
+### Segue as evidencias.
+
+- Logs ![NS_DYNATRACE](images/app_logs.png)
+
+- APM/TRACES ![NS_DYNATRACE](images/app_traces.png)
+
+- Métricas ![NS_DYNATRACE](images/k8s_metricas.png)
+
+
+
 ## Considerações finais
 
 Este challenge foi realmente desafiador, trouxe conteúdo denso de vários aspectos envolvendo infraestrutura, desenvolvimento de software e IA, com certeza temos vários pontos a melhorar principalmente visando, Processo deployment (Blue-Green ou Canary), segurança e CICD, entretanto acredito que consegui todos aspectos importantes que foram me solicitados.
 
-## Referência
+## Referências
 
 
 ### Contato

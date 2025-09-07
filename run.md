@@ -82,6 +82,7 @@ d- ) Kubernetes cluster unreachable: the server has asked for the client to prov
 - ``helm uninstall desafio-meli-release --namespace desafio-meli-app`` - Caso queira remover
 
 ## 5- ) Deploy do Dynatrace
+- Crie uma conta em ``https://www.dynatrace.com/signup/``
 - Siga ao diretorio [Dynatrace_templete](/helm-charts/dynatrace_template/)
 - ``helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator \
 --create-namespace \
