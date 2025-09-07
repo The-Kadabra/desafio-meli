@@ -87,6 +87,32 @@ d- ) Kubernetes cluster unreachable: the server has asked for the client to prov
 --create-namespace \
 --namespace dynatrace
 ``  - Aqui vc estrá instalando o gateway de dados, operador do agent dynatrace e webhook.
+
 -  ``kubectl get pod -n dynatrace`` - Veja o status dos PODS aguarde todos ficarem running para seguir pois a proxima etapa depende do POD do webhook.
+
 - ``kubectl apply -f dynakube.yaml`` - Vamos instalar o modulo dos coletores que são formados por: Otel-collector, activegate e logmonitoring.
-- ``kubectl get pod -n dynatrace`` - Observe se vc possui um conjunto de 9 serviços Segue a imagem da saida do meu comando: ![NS_DYNATRACE](images/namespace_dynatrace.png.png)
+
+- ``kubectl get pod -n dynatrace`` - Observe se vc possui um conjunto de 9 serviços Segue a imagem da saida do meu comando: ![NS_DYNATRACE](images/namespace_dynatrce.png)
+
+## 6- ) Aplicação local com Docker
+
+- Navegue até o diretorio da [Raiz](/).
+
+- Execute o Docker-compose
+    ```
+    docker-compose up --build -d
+    ```
+- Veja o enpoint em seu navedor acessando.
+    ```
+    http://localhost:3000/api/health
+    ```
+
+
+## 7- ) Aplicação em nosso ambiente Produtivo
+
+- Teste direto com ```cUrl``` ou ```Postman```.
+    ```
+    curl -v -i -H "x-api-key: 6EQTUpGBjV4djYhePGqW45ANUV4elLd33xeAgOwS" https://api.coreplatform.com.br/products 
+    ``` 
+*Essa APIKEY será encerrada em 10/09/2025.*
+
