@@ -77,8 +77,16 @@ d- ) Kubernetes cluster unreachable: the server has asked for the client to prov
 ## 4- ) Deploy da Aplicação
 - Siga ao diretorio [app_templete](/helm-charts/app_template/)
 - ``helm install desafio-meli-release . -f values.yaml --namespace desafio-meli-app`` - Vc fará o deploy da imagem da app que já está no seu ECR para o EKS
-- ``k get po -n desafio-meli-app`` - Verifica o status do pod
+- ``kubectl get po -n desafio-meli-app`` - Verifica o status do pod
 - ``kubectl logs -n desafio-meli-app -l app=desafio-meli-app --all-containers`` - verifica os logs da APP
 - ``helm uninstall desafio-meli-release --namespace desafio-meli-app`` - Caso queira remover
 
 ## 5- ) Deploy do Dynatrace
+- Siga ao diretorio [Dynatrace_templete](/helm-charts/dynatrace_template/)
+- ``helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator \
+--create-namespace \
+--namespace dynatrace
+``  - Aqui vc estrá instalando o gateway de dados, operador do agent dynatrace e webhook.
+-  ``kubectl get pod -n dynatrace`` - Veja o status dos PODS aguarde todos ficarem running para seguir pois a proxima etapa depende do POD do webhook.
+- ``kubectl apply -f dynakube.yaml`` - Vamos instalar o modulo dos coletores que são formados por: Otel-collector, activegate e logmonitoring.
+- ``kubectl get pod -n dynatrace`` - Observe se vc possui um conjunto de 9 serviços Segue a imagem da saida do meu comando: ![NS_DYNATRACE](images/namespace_dynatrace.png.png)
