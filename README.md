@@ -170,11 +170,14 @@ Aqui nós temos Métricas, Logs e AP, ou seja a trindade da Observabilidade.
 
 ### Segue as evidencias.
 
-- Logs ![NS_DYNATRACE](images/app_logs.png)
+### Logs 
+ ![NS_DYNATRACE](images/app_logs.png) 
 
-- APM/TRACES ![NS_DYNATRACE](images/app_traces.png)
+### APM/TRACES 
+![NS_DYNATRACE](images/app_traces.png)
 
-- Métricas ![NS_DYNATRACE](images/k8s_metricas.png)
+### Métricas
+ ![NS_DYNATRACE](images/k8s_metricas.png)
 
 
 
@@ -183,6 +186,12 @@ Aqui nós temos Métricas, Logs e AP, ou seja a trindade da Observabilidade.
 Este challenge foi realmente desafiador, trouxe conteúdo denso de vários aspectos envolvendo infraestrutura, desenvolvimento de software e IA, com certeza temos vários pontos a melhorar principalmente visando, Processo deployment (Blue-Green ou Canary), segurança e CICD, entretanto acredito que consegui todos aspectos importantes que foram me solicitados.
 
 ## Referências
+
+https://github.com/Dynatrace/easytrade \
+https://docs.nginx.com/nginx-ingress-controller/ \
+https://docs.aws.amazon.com/eks/latest/eksctl/installation.html \
+https://github.com/aws-ia/terraform-aws-eks-blueprints \
+
 
 
 ### Contato
