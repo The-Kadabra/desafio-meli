@@ -2,11 +2,29 @@
 
 
 
-executando o terraform plan/apply:
+## 1-) Instalando os requisitos
+
+Este script foi projetado para automatizar a instalação e configuração de um ambiente de desenvolvimento focado em DevOps, Cloud e conteinerização em um sistema operacional baseado em Debian/Ubuntu.
+
+Antes de executa-lo não se esqueça do comando `chmod +x requisitos.sh`. Veja o conteúdo: [Requisitos](requisitos/requisitos.sh)
+
+Ao executar este script, as seguintes ferramentas serão instaladas e configuradas no seu computador:
+- ``Git`` 
+- ``Python 3.8``
+- ``Terraform``
+- ``Docker e Docker Compose``
+- ``kubectl (v1.33.3)``
+- ``Helm (v4.0.0-alpha.1)``
+- ``AWS EKS (v1.33)``
+
+
+
+
+## 2-) Executando o terraform plan/apply:
 
 Primeiro:
-Execute o comando que vai perdir o seu terraform a interagir com o DOCKER (isso é necessario para o ECR).
-newgrp docker
+- Execute o comando que vai permitir o seu terraform a interagir com o a lib do docker em seu computador local (isso é necessario para o ECR).
+`newgrp docker`
 
 Segundo:
 terraform plan -target=module.vpc

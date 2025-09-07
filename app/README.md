@@ -1,6 +1,6 @@
 # Express API Project
 
-This is a basic Node.js project that sets up an Express API with CORS configuration and automatic JSON parsing.
+Este é um projeto básico do Node.js que configura uma API Express com configuração CORS e análise automática de JSON.
 
 ## Project Structure
 
@@ -21,13 +21,13 @@ express-api-project
 1. Clone the repository:
 
    ```
-   git clone <repository-url>
+   git clone git@github.com:The-Kadabra/desafio-meli.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd express-api-project
+   cd app
    ```
 
 3. Install the dependencies:
@@ -44,7 +44,3 @@ express-api-project
 ## API Endpoints
 
 - `GET /api` - Returns a 200 status.
-
-## License
-
-This project is licensed under the MIT License.
