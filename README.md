@@ -141,13 +141,14 @@ Microsserviço em **Node.js** com arquitetura em **Express.js**, incluindo:
 
 # Tecnologias que temos em nossa Stalck:
 
-| Name                              | Bool              | Who                  | description                                                    |
-|-----------------------------------|-------------------|----------------------|----------------------------------------------------------------|
-| `Eks Escalavel`                   | ✓                 | Karpenter            | Baseado em consumo de cpu, memo, requests                      |
-| `Observabilidade`                 | ✓                 | Dynatrace             | Deploy utiizando helm-chart                                    |
-| `API     `                        | ✓                 | Aws Api Gtw          | Api REST criada com IaaS                                       |
-| `Container Registry`              | ✓                 | Aws Ecr              | Gerencia e armazena imagens                                    |
-| `Instrumentação de Aplicação`     | ✓                 | Opentelemetry        | SDK para Node Js                                               |
-| `Tratamento de Erros da API`      | ✓                 | Gateway Response     | Feature do Aws Api                                             |
-| `Prevenção de Throttle`           | ✓                 | Burst and Rate limit | Feature do Aws Api                                             |
-| `IA Agents`                       | ✓                 | n8n                  | Consumindo nossa API e sugerindo evolução dos produtos listados| 
+| Name                              | Bool              | Who                  | description                                                                          |
+|-----------------------------------|-------------------|----------------------|--------------------------------------------------------------------------------------|
+| `Eks Escalavel`                   | ✓                 | Karpenter            | Baseado em consumo de cpu, memo, requests                                           |
+| `Observabilidade`                 | ✓                 | Dynatrace            | Deploy utiizando helm-chart                                                         |
+| `API     `                        | ✓                 | Aws Api Gtw          | Api REST criada com IaaS                                                            |
+| `Container Registry`              | ✓                 | Aws Ecr              | Gerencia e armazena imagens                                                         |
+| `Instrumentação de Aplicação`     | ✓                 | Opentelemetry        | SDK para Node Js                                                                    |
+| `Tratamento de Erros da API`      | ✓                 | Gateway Response     | Feature do Aws Api                                                                  |
+| `Prevenção de Throttle`           | ✓                 | Burst and Rate limit | Feature do Aws Api                                                                  |
+| `IA Agents`                       | ✓                 | n8n                  | Consumindo nossa API e sugerindo evolução dos produtos listados                     |
+| `Projeto compativel com PCI 4.0`  | ✓                 | Aws Bottlerocket     | Sistema operacional baseado em Linux construído sob medida para executar contêineres| 

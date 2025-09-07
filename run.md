@@ -74,4 +74,11 @@ d- ) Kubernetes cluster unreachable: the server has asked for the client to prov
 ``terraform plan --target=data.aws_eks_cluster_auth.this`` \
 ``terraform apply --target=data.aws_eks_cluster_auth.this --auto-approve`` 
 
+## 4- ) Deploy da Aplicação
+- Siga ao diretorio [app_templete](/helm-charts/app_template/)
+- ``helm install desafio-meli-release . -f values.yaml --namespace desafio-meli-app`` - Vc fará o deploy da imagem da app que já está no seu ECR para o EKS
+- ``k get po -n desafio-meli-app`` - Verifica o status do pod
+- ``kubectl logs -n desafio-meli-app -l app=desafio-meli-app --all-containers`` - verifica os logs da APP
+- ``helm uninstall desafio-meli-release --namespace desafio-meli-app`` - Caso queira remover
 
+## 5- ) Deploy do Dynatrace
