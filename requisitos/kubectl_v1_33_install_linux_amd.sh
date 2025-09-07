@@ -1,28 +1,32 @@
 #!/bin/bash
+set -e
+
 # Install kubectl for Kubernetes v1.33
+KUBECTL_VERSION="1.33.3"
+KUBECTL_DATE="2025-08-03"
+KUBECTL_URL="https://s3.us-west-2.amazonaws.com/amazon-eks/${KUBECTL_VERSION}/${KUBECTL_DATE}/bin/linux/amd64"
 
-# Download kubectl binary
-echo "Downloading kubectl v1.33..."
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.33.3/2025-08-03/bin/linux/amd64/kubectl
+echo "=== Downloading kubectl v${KUBECTL_VERSION} ==="
+curl -LO "${KUBECTL_URL}/kubectl"
 
-# Download SHA-256 checksum
-echo "Downloading SHA-256 checksum..."
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.33.3/2025-08-03/bin/linux/amd64/kubectl.sha256
+echo "=== Downloading SHA-256 checksum ==="
+curl -LO "${KUBECTL_URL}/kubectl.sha256"
 
-# Verify SHA-256 checksum
-echo "Verifying checksum..."
+echo "=== Verifying checksum ==="
 sha256sum -c kubectl.sha256
 
-# Make the binary executable
-echo "Making kubectl executable..."
+echo "=== Making kubectl executable ==="
 chmod +x ./kubectl
 
-# Copy the binary to a directory in your PATH
-echo "Installing kubectl to $HOME/bin..."
+echo "=== Installing kubectl to \$HOME/bin ==="
 mkdir -p $HOME/bin
 cp ./kubectl $HOME/bin/kubectl
 export PATH=$HOME/bin:$PATH
 
-# Add $HOME/bin to shell startup file so PATH persists
-echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
-echo "kubectl installation completed. Please restart your shell or run 'source ~/.bashrc'."
+# Persist PATH in shell startup file
+if ! grep -q 'export PATH=\$HOME/bin:\$PATH' ~/.bashrc; then
+  echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+fi
+
+echo "=== kubectl installation completed ==="
+echo "Run 'source ~/.bashrc' or restart your shell to update PATH."

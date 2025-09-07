@@ -1,8 +1,11 @@
-# Atualizar lista de pacotes
-sudo apt-get update
+#!/bin/bash
+set -e
 
-# Instalar o Git
-sudo apt-get install git -y
+echo "=== Atualizando lista de pacotes ==="
+sudo apt-get update -y
 
-# Verificar versão instalada
+echo "=== Instalando Git ==="
+sudo apt-get install -y git
+
+echo "=== Verificando versão instalada ==="
 git --version
