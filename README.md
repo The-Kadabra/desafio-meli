@@ -166,7 +166,7 @@ Estes são os custos que teremos na AWS sem contar as requisições em nossas ap
 A escolha do dynatrce veio pela questão de ser o framework mais rápido de se ter acesso ao free trial e criar uma Stack OpenSource levaria mais tempo. Mais deixo registrado que tenho uma stack criada segue link do [IN](https://www.linkedin.com/in/gabriel-henrique-pires-5039a3168/#:~:text=Projetos-,Observabilidade%20Cloud%20Native%20%2D%20EVK,-Observabilidade%20Cloud%20Native
 ) 
 
-Aqui nós temos Métricas, Logs e AP, ou seja a trindade da Observabilidade. 
+Aqui nós temos Métricas, Logs e APM, ou seja a trindade da Observabilidade. 
 
 ### Segue as evidencias.
 
