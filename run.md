@@ -23,20 +23,20 @@ Ao executar este script, as seguintes ferramentas serão instaladas e configurad
 ## 2-) Executando o terraform plan/apply:
 
 Primeiro:
-- Execute o comando que vai permitir o seu terraform a interagir com o a lib do docker em seu computador local (isso é necessario para o ECR).
+- Execute o comando que vai permitir o seu terraform a interagir com o a lib do docker em seu computador local (isso é necessario para o ECR): \
 `newgrp docker`
 
-Segundo:
-terraform plan -target=module.vpc
-terraform apply -target=module.vpc
+- Segundo: Vamos construir as fundações do projeto, ou seja, a rede: \
+``terraform plan -target=module.vpc`` \
+``terraform apply -target=module.vpc`` 
 
-Terceiro:
-terraform plan -target=module.eks
-terraform apply -target=module.eks
+- Terceiro: Aqui o seu cluster, node, addons, permissionamentos serão criados e associados. \
+``terraform plan -target=module.eks`` \
+``terraform apply -target=module.eks`` 
 
-Ultimo passo:
-terraform plan
-terraform apply
+- Ultimo passo: \
+``terraform plan`` Aqui vms criar todo o resto do conteudo funcional da sua infraestrutura aws.\
+``terraform apply``
 
 
 # Uso diario e cuidado ao criar um CI/CD
