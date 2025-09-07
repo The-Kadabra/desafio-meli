@@ -139,7 +139,7 @@ Microsserviço em **Node.js** com arquitetura em **Express.js**, incluindo:
 - `Teste end-to-end` → Usando o Cypress por exemplo, será possível valida o fluxo completo da aplicação, do começo ao fim, para garantir que o sistema funciona para o usuário final.
 - `Testes unitarios` → Para garantir o funcionamento isolado de cada parte do código.
 
-# Tecnologias que temos em nossa Stalck:
+## Tecnologias que usamos em nossa Stalck:
 
 | Name                              | Bool              | Who                  | description                                                                          |
 |-----------------------------------|-------------------|----------------------|--------------------------------------------------------------------------------------|
@@ -152,3 +152,22 @@ Microsserviço em **Node.js** com arquitetura em **Express.js**, incluindo:
 | `Prevenção de Throttle`           | ✓                 | Burst and Rate limit | Feature do Aws Api                                                                  |
 | `IA Agents`                       | ✓                 | n8n                  | Consumindo nossa API e sugerindo evolução dos produtos listados                     |
 | `Projeto compativel com PCI 4.0`  | ✓                 | Aws Bottlerocket     | Sistema operacional baseado em Linux construído sob medida para executar contêineres| 
+
+## Custo da infraestrutura
+Estes são os custos que teremos na AWS sem contar as requisições em nossas api. Isso mostra que começar um projeto, empresa ou startup de forma consistente não é caro, só precisa pensar de forma inteligente.
+
+| Dia em dólar | Semana em Dólar | Mês em Dolar |
+|--------------|-----------------|--------------|
+| $6.25        | $43.75          | $175.00      |
+
+## Considerações finais
+
+Este challenge foi realmente desafiador, trouxe conteúdo denso de vários aspectos envolvendo infraestrutura, desenvolvimento de software e IA, com certeza temos vários pontos a melhorar principalmente visando, Processo deployment (Blue-Green ou Canary), segurança e CICD, entretanto acredito que consegui todos aspectos importantes que foram me solicitados.
+
+## Referência
+
+
+### Contato
+IN: https://www.linkedin.com/in/gabriel-henrique-pires-5039a3168/ \
+Youtube: https://www.youtube.com/@Gabriel_Pires_Tech (Em breve conteúdo) \
+E-mail: gabriel.pires.ti@gmail.com
