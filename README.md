@@ -1,7 +1,7 @@
 # Desafio Mercado Livre
 
 ## Descrição do Projeto
-O desafio deste projeto está dividido em 3 etapas principais, com o objetivo de construir uma arquitetura de API robusta, escalável, resiliente e segura.
+O desafio deste projeto está dividido em 4 etapas principais, com o objetivo de construir uma arquitetura de API robusta, escalável, resiliente, segura e interativa com IA.
 
 ### 1. Ambiente de API Seguro e Resiliente
 A primeira etapa focou na construção de uma API segura e resiliente usando **AWS API Gateway REST**.  
@@ -129,8 +129,22 @@ Microsserviço em **Node.js** com arquitetura em **Express.js**, incluindo:
 ---
 ## Futuro
 
+- `Escalabilidade da APP/PODS` → Utilizar EFS para o arquivo `.json` que está servindo de "Banco de dados", com o AWS EFS poderei compartilhar o arquivo com varios POD's.
 - `Deploy CICD via GIT com GitOps` → Usando OIDC entre AWS e Github, helm e argocd.
 - `Autenticação JWT na API` → Neste conexto usaria o AWS Cognito no papel de OAuth 2.0.
 - `Camada de borda` → Adicionaria a Cloudflare como CDN e WAF do meu ambiente.
-- `Teste end-to-end` → Usando o Cypress por exemplo será possível valida o fluxo completo da aplicação, do começo ao fim, para garantir que o sistema funciona para o usuário final.
+- `Teste end-to-end` → Usando o Cypress por exemplo, será possível valida o fluxo completo da aplicação, do começo ao fim, para garantir que o sistema funciona para o usuário final.
 - `Testes unitarios` → Para garantir o funcionamento isolado de cada parte do código.
+
+# Tecnologias que temos em nossa Stalck:
+
+| Name                              | Bool              | Who                  | description                                                    |
+|-----------------------------------|-------------------|----------------------|----------------------------------------------------------------|
+| `Eks Escalavel`                   | ✓                 | Karpenter            | Baseado em consumo de cpu, memo, requests                      |
+| `Observabilidade`                 | ✓                 | Dynatrce             | Deploy utiizando helm-chart                                    |
+| `API     `                        | ✓                 | Aws Api Gtw          | Api REST criada com IaaS                                       |
+| `Container Registry`              | ✓                 | Aws Ecr              | Gerencia e armazena imagens                                    |
+| `Instrumentação de Aplicação`     | ✓                 | Opentelemetry        | SDK para Node Js                                               |
+| `Tratamento de Erros da API`      | ✓                 | Gateway Response     | Feature do Aws Api                                             |
+| `Prevenção de Throttle`           | ✓                 | Burst and Rate limit | Feature do Aws Api                                             |
+| `IA Agents`                       | ✓                 | n8n                  | Consumindo nossa API e sugerindo evolução dos produtos listados| 

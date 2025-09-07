@@ -24,6 +24,7 @@ spec:
   oneAgent:
     applicationMonitoring: {}
   activeGate:
+    useEphemeralVolume: true
     capabilities:
       - routing
       - kubernetes-monitoring
@@ -35,13 +36,6 @@ spec:
       limits:
         cpu: 1000m
         memory: 1.5Gi
-    volumeClaimTemplate:
-      accessModes:
-        - ReadWriteOnce
-      storageClassName: gp3
-      resources:
-        requests:
-          storage: 1Gi
   templates:
     logMonitoring:
       imageRef:
