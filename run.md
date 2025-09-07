@@ -39,34 +39,39 @@ Primeiro:
 ``terraform apply``
 
 
-# Uso diario e cuidado ao criar um CI/CD
-O token de comunicação do EKS é curto, caso vc tenha problemas relacionados á:
-1) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
+## 3-) Uso diario e cuidado ao criar um CI/CD
+O token de comunicação do EKS é curto (default aws), caso vc tenha problemas relacionados á:
+```text
+ a- ) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
 │ 
 │   with helm_release.argocd,
 │   on main.tf line 1, in resource "helm_release" "argocd":
 │    1: resource "helm_release" "argocd" {}
 
-2) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
+b- ) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
 │ 
 │   with helm_release.ingress_nginx,
 │   on main.tf line 32, in resource "helm_release" "ingress_nginx":
 │   32: resource "helm_release" "ingress_nginx" {}
-
-3) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
+c- ) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
 │ 
 │   with module.eks_blueprints_addons.module.aws_load_balancer_controller.helm_release.this[0],
 │   on .terraform/modules/eks_blueprints_addons.aws_load_balancer_controller/main.tf line 9, in resource "helm_release" "this":
 │    9: resource "helm_release" "this" {}
 
-4) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
+d- ) Kubernetes cluster unreachable: the server has asked for the client to provide credentials
 │ 
 │   with module.eks_blueprints_addons.module.metrics_server.helm_release.this[0],
 │   on .terraform/modules/eks_blueprints_addons.metrics_server/main.tf line 9, in resource "helm_release" "this":
 │    9: resource "helm_release" "this" {}
+``` 
+## 3.1-) Segue a solução:
 
-Segue a solução: Este processo a seguir faz com que um novo token seja gerado e gravado localmente ou pelo CI/CD.
-terraform taint data.aws_eks_cluster_auth.this
-terraform state rm data.aws_eks_cluster_auth.this
-terraform plan --target=data.aws_eks_cluster_auth.this
-terraform apply --target=data.aws_eks_cluster_auth.this --auto-approve
+ Este processo a seguir faz com que um novo token seja gerado e gravado localmente ou pelo CI/CD:
+
+``terraform taint data.aws_eks_cluster_auth.this`` \
+``terraform state rm data.aws_eks_cluster_auth.this`` \
+``terraform plan --target=data.aws_eks_cluster_auth.this`` \
+``terraform apply --target=data.aws_eks_cluster_auth.this --auto-approve`` 
+
+

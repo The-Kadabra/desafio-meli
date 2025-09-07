@@ -144,7 +144,7 @@ Microsserviço em **Node.js** com arquitetura em **Express.js**, incluindo:
 | Name                              | Bool              | Who                  | description                                                    |
 |-----------------------------------|-------------------|----------------------|----------------------------------------------------------------|
 | `Eks Escalavel`                   | ✓                 | Karpenter            | Baseado em consumo de cpu, memo, requests                      |
-| `Observabilidade`                 | ✓                 | Dynatrce             | Deploy utiizando helm-chart                                    |
+| `Observabilidade`                 | ✓                 | Dynatrace             | Deploy utiizando helm-chart                                    |
 | `API     `                        | ✓                 | Aws Api Gtw          | Api REST criada com IaaS                                       |
 | `Container Registry`              | ✓                 | Aws Ecr              | Gerencia e armazena imagens                                    |
 | `Instrumentação de Aplicação`     | ✓                 | Opentelemetry        | SDK para Node Js                                               |
