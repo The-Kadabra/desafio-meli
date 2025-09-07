@@ -6,6 +6,8 @@ O desafio deste projeto está dividido em 4 etapas principais, com o objetivo de
 Para saber como executar este projeto veja em [RUN.MD](/run.md).
 
 ## Sobre o Projeto
+![APIGTW](images/Arquitetura_aws.png) 
+
 
 ### 1. Ambiente de API Seguro e Resiliente
 A primeira etapa focou na construção de uma API segura e resiliente usando **AWS API Gateway REST**.  
