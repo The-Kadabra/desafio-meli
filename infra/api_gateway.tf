@@ -79,9 +79,9 @@ resource "aws_api_gateway_integration_response" "ok" {
   status_code = aws_api_gateway_method_response.ok.status_code
 }
 
-# -------------------------------
+# ####################
 # Deployment + Stage
-# -------------------------------
+# ####################
 resource "aws_api_gateway_deployment" "example" {
   rest_api_id = aws_api_gateway_rest_api.example.id
 
@@ -100,9 +100,9 @@ resource "aws_api_gateway_stage" "dev" {
   stage_name    = "dev"
 }
 
-# -------------------------------
+############################
 # API Key + Usage Plan
-# -------------------------------
+##############################
 resource "aws_api_gateway_api_key" "example" {
   name    = "desafio-api-key"
   enabled = true
