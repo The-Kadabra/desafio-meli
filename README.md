@@ -3,6 +3,9 @@
 ## Descrição do Projeto
 O desafio deste projeto está dividido em 4 etapas principais, com o objetivo de construir uma arquitetura de API robusta, escalável, resiliente, segura e interativa com IA.
 
+## RUN.MD
+Para saber como executar este projeto veja em [RUN.MD](/run.md)
+
 ### 1. Ambiente de API Seguro e Resiliente
 A primeira etapa focou na construção de uma API segura e resiliente usando **AWS API Gateway REST**.  
 Essa escolha garante um ambiente de API gerenciado que lida com o tráfego, autorização e integrações de forma eficiente.

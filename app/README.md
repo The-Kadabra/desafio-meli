@@ -2,8 +2,6 @@
 
 Este é um projeto básico do Node.js que configura uma API Express com configuração CORS e análise automática de JSON.
 
-Para saber como executar este projeto veja em [RUN.MD](/run.md)
-
 ## Project Structure
 
 ```
